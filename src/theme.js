@@ -19,6 +19,9 @@ const theme = {
     backgroundColor: "#24292e",
     textColor: "white",
   },
+  borderRadius: {
+    general: 5,
+  },
 };
 
 export default theme;
