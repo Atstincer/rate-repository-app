@@ -21,7 +21,7 @@ const theme = {
     textColor: "white",
   },
   borderRadius: {
-    general: 5,
+    general: 2,
   },
 };
 
