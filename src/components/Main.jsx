@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import { Route, Routes, Navigate } from "react-router-native";
 import RepositoryList from "./RepositoryList";
 import AppBar from "./AppBar";
@@ -14,6 +14,8 @@ const styles = StyleSheet.create({
 });
 
 const Main = () => {
+  //console.log(`Running on ${Platform.OS}`);
+  //console.log(`mainFont: ${theme.fonts.main}`);
   return (
     <View style={styles.container}>
       <AppBar />
