@@ -29,6 +29,9 @@ export default defineConfig([
         ...reactNative.environments["react-native"]["react-native"],
         console: "readonly",
         fetch: "readonly",
+        require: "readonly",
+        module: "readonly",
+        __dirname: "readonly",
       },
 
       parser: babelParser,
