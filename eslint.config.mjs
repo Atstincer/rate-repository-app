@@ -32,6 +32,7 @@ export default defineConfig([
         require: "readonly",
         module: "readonly",
         __dirname: "readonly",
+        process: "readonly",
       },
 
       parser: babelParser,
