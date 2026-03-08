@@ -14,21 +14,6 @@ const ItemSeparator = () => <View style={styles.separator} />;
 const RepositoryList = () => {
   const { repositories } = useRepositories();
 
-  /*const [repositories, setRepositories] = useState();
-
-  const fetchRepositories = async () => {
-    const response = await fetch("http://192.168.0.17:5000/api/repositories");
-    const json = await response.json();
-
-    console.log(json);
-
-    setRepositories(json);
-  };
-
-  useEffect(() => {
-    fetchRepositories();
-  }, []);*/
-
   const repositoryNodes = repositories
     ? repositories.edges.map((e) => e.node)
     : [];
