@@ -60,7 +60,7 @@ const DetailInfo = ({ name, value }) => {
 const RepositoryItem = ({ item }) => {
   //console.log(item.ownerAvatarUrl);
   return (
-    <View style={styles.containerMain}>
+    <View style={styles.containerMain} testID="repositoryItem">
       <View style={styles.innerContainer}>
         <Image style={styles.image} source={{ uri: item.ownerAvatarUrl }} />
         <View style={styles.containerMainInfo}>

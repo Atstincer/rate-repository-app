@@ -17,7 +17,11 @@ const compat = new FlatCompat({
 
 export default defineConfig([
   {
-    extends: compat.extends("eslint:recommended", "plugin:react/recommended"),
+    extends: compat.extends(
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:jest/recommended",
+    ),
 
     plugins: {
       react,
@@ -33,6 +37,15 @@ export default defineConfig([
         module: "readonly",
         __dirname: "readonly",
         process: "readonly",
+        // Jest globals
+        describe: "readonly",
+        it: "readonly",
+        expect: "readonly",
+        beforeEach: "readonly",
+        afterEach: "readonly",
+        beforeAll: "readonly",
+        afterAll: "readonly",
+        test: "readonly",
       },
 
       parser: babelParser,
