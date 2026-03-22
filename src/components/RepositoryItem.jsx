@@ -2,6 +2,7 @@ import { View, Image, StyleSheet, Pressable, Button } from "react-native";
 import Text from "./Text";
 import theme from "../theme";
 import { useNavigate } from "react-router-native";
+import { Linking } from "react-native";
 
 const styles = StyleSheet.create({
   image: {
@@ -96,7 +97,15 @@ const RepositoryItem = ({ item, detailView }) => {
           <DetailInfo name={"Rating"} value={item.ratingAverage} />
         </View>
         {detailView && (
-          <Pressable style={styles.button}>
+          <Pressable
+            style={styles.button}
+            onPress={() => {
+              //console.log(`trying to open url ${item.url}`);
+              //expo-linking is not working for me
+
+              Linking.openURL(item.url);
+            }}
+          >
             <Text fontWeight={"bold"} style={{ color: "white" }}>
               Open in Github
             </Text>

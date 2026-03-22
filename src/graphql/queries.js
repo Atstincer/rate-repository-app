@@ -11,6 +11,7 @@ const REPOSIKTORY_FRAGMENT = gql`
     forksCount
     reviewCount
     ratingAverage
+    url
   }
 `;
 
@@ -33,7 +34,7 @@ export const GET_REPOSITORY = gql`
       ...RepositoryFragment
     }
   }
-    ${REPOSIKTORY_FRAGMENT}
+  ${REPOSIKTORY_FRAGMENT}
 `;
 
 export const ME = gql`
