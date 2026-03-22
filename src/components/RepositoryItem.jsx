@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
   innerContainer: {
     flexDirection: "row",
     justifyContent: "flex-start",
-    //flex: 1,
   },
   containerMainInfo: {
     //justifyContent: "space-evenly",
