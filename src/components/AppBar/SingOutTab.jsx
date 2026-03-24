@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet } from "react-native";
-import Text from "./Text";
-import theme from "../theme";
-import useAuthStorage from "../hooks/useAuthStorage";
+import Text from "../Text";
+import theme from "../../theme";
+import useAuthStorage from "../../hooks/useAuthStorage";
 import { useApolloClient } from "@apollo/client";
 
 const styles = StyleSheet.create({
