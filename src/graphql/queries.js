@@ -15,9 +15,25 @@ const REPOSIKTORY_FRAGMENT = gql`
   }
 `;
 
-export const GET_REPOSITORIES = gql`
+/*export const GET_REPOSITORIES = gql`
   query {
     repositories {
+      edges {
+        node {
+          ...RepositoryFragment
+        }
+      }
+    }
+  }
+  ${REPOSIKTORY_FRAGMENT}
+`;*/
+
+export const GET_REPOSITORIES = gql`
+  query Repositories(
+    $orderBy: AllRepositoriesOrderBy
+    $orderDirection: OrderDirection
+  ) {
+    repositories(orderBy: $orderBy, orderDirection: $orderDirection) {
       edges {
         node {
           ...RepositoryFragment
