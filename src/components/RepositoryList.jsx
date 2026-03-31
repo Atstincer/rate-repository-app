@@ -3,6 +3,7 @@ import RepositoryItem from "./RepositoryItem";
 import useRepositories from "../hooks/useRepositories";
 import { useState } from "react";
 import { Picker } from "@react-native-picker/picker";
+import { Searchbar } from "react-native-paper";
 
 const styles = StyleSheet.create({
   separator: {
@@ -31,7 +32,30 @@ const MyPicker = ({ state }) => {
   );
 };
 
-export const RepositoryListContainer = ({ repositories, pickerState }) => {
+const HeaderComponent = ({ pickerState, searchBarState }) => {
+  return (
+    <View>
+      <MySearchBar state={searchBarState} />
+      <MyPicker state={pickerState} />
+    </View>
+  );
+};
+
+const MySearchBar = ({ state }) => {
+  return (
+    <Searchbar
+      value={state.value}
+      onChangeText={state.setValue}
+      placeholder="Search"
+    />
+  );
+};
+
+export const RepositoryListContainer = ({
+  repositories,
+  pickerState,
+  searchBarState,
+}) => {
   const repositoryNodes = repositories
     ? repositories.edges.map((e) => e.node)
     : [];
@@ -41,23 +65,30 @@ export const RepositoryListContainer = ({ repositories, pickerState }) => {
       data={repositoryNodes}
       ItemSeparatorComponent={ItemSeparator}
       renderItem={({ item }) => <RepositoryItem item={item} />}
-      ListHeaderComponent={<MyPicker state={pickerState} />}
+      ListHeaderComponent={
+        <HeaderComponent
+          pickerState={pickerState}
+          searchBarState={searchBarState}
+        />
+      }
     />
   );
 };
 
 const RepositoryList = () => {
-  const [value, setValue] = useState("latest_repositories");
-  //console.log("value", value);
-
-  const sortBy = SortingOptions[value];
-  //console.log("sortBy", sortBy);
-  const { repositories } = useRepositories(sortBy);
+  const [sortKey, setSortKey] = useState("latest_repositories");
+  const [searchQuery, setSearchQuery] = useState(undefined);
+  //console.log("searchBy", searchQuery);
+  const { repositories } = useRepositories({
+    ...SortingOptions[sortKey],
+    searchKeyword: searchQuery,
+  });
 
   return (
     <RepositoryListContainer
       repositories={repositories}
-      pickerState={{ value, setValue }}
+      pickerState={{ value: sortKey, setValue: setSortKey }}
+      searchBarState={{ value: searchQuery, setValue: setSearchQuery }}
     />
   );
 };
