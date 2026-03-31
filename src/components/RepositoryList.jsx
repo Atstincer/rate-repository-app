@@ -4,6 +4,7 @@ import useRepositories from "../hooks/useRepositories";
 import { useState } from "react";
 import { Picker } from "@react-native-picker/picker";
 import { Searchbar } from "react-native-paper";
+import { useDebounce } from "use-debounce";
 
 const styles = StyleSheet.create({
   separator: {
@@ -79,9 +80,13 @@ const RepositoryList = () => {
   const [sortKey, setSortKey] = useState("latest_repositories");
   const [searchQuery, setSearchQuery] = useState(undefined);
   //console.log("searchBy", searchQuery);
+
+  const [deboncedQuery] = useDebounce(searchQuery, 500);
+  //console.log("deboncedQuery", deboncedQuery);
+
   const { repositories } = useRepositories({
     ...SortingOptions[sortKey],
-    searchKeyword: searchQuery,
+    searchKeyword: deboncedQuery,
   });
 
   return (
