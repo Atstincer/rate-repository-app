@@ -15,18 +15,18 @@ const REPOSIKTORY_FRAGMENT = gql`
   }
 `;
 
-/*export const GET_REPOSITORIES = gql`
-  query {
-    repositories {
-      edges {
-        node {
-          ...RepositoryFragment
-        }
-      }
+const REVIEW_FRAGMENT = gql`
+  fragment ReviewFragment on Review {
+    id
+    text
+    createdAt
+    rating
+    user {
+      id
+      username
     }
   }
-  ${REPOSIKTORY_FRAGMENT}
-`;*/
+`;
 
 export const GET_REPOSITORIES = gql`
   query Repositories(
@@ -56,27 +56,29 @@ export const GET_REPOSITORY = gql`
       reviews {
         edges {
           node {
-            id
-            text
-            createdAt
-            rating
-            user {
-              id
-              username
-            }
+            ...ReviewFragment
           }
         }
       }
     }
   }
   ${REPOSIKTORY_FRAGMENT}
+  ${REVIEW_FRAGMENT}
 `;
 
 export const ME = gql`
-  query {
+  query getCurrentUser($includeReviews: Boolean = false) {
     me {
       id
       username
+      reviews @include(if: $includeReviews) {
+        edges {
+          node {
+            ...ReviewFragment
+          }
+        }
+      }
     }
   }
+  ${REVIEW_FRAGMENT}
 `;

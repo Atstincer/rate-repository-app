@@ -72,6 +72,7 @@ export const RepositoryListContainer = ({
           searchBarState={searchBarState}
         />
       }
+      StickyHeaderComponent={true}
     />
   );
 };

@@ -27,6 +27,9 @@ const AppBar = () => {
         {data && data.me && (
           <AppBarTab text={"Create a review"} link={"/NewReview"} />
         )}
+        {data && data.me && (
+          <AppBarTab text={"My reviews"} link={"/MyReviews"} />
+        )}
         {data && data.me && <SingOutTab />}
       </ScrollView>
     </View>
