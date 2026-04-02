@@ -3,6 +3,7 @@ import Text from "../Text";
 import theme from "../../theme";
 import useAuthStorage from "../../hooks/useAuthStorage";
 import { useApolloClient } from "@apollo/client";
+import { useNavigate } from "react-router-native";
 
 const styles = StyleSheet.create({
   text: {
@@ -14,6 +15,7 @@ const styles = StyleSheet.create({
 const SingOutTab = () => {
   const authStorage = useAuthStorage();
   const apolloClient = useApolloClient();
+  const navigate = useNavigate();
 
   const onPress = async () => {
     console.log("tab pressed");
@@ -21,6 +23,7 @@ const SingOutTab = () => {
     console.log("checking authStorage property", accessToken);
     await authStorage.removeAccessToken();
     apolloClient.resetStore();
+    navigate("/");
   };
 
   return (
