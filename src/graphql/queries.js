@@ -21,6 +21,7 @@ const REVIEW_FRAGMENT = gql`
     text
     createdAt
     rating
+    repositoryId
     user {
       id
       username
