@@ -90,11 +90,11 @@ const RepositoryList = () => {
   const { repositories, fetchMore } = useRepositories({
     ...SortingOptions[sortKey],
     searchKeyword: deboncedQuery,
-    first: 3,
+    first: 8,
   });
 
   const onEndReach = () => {
-    console.log("end of list reached");
+    //console.log("end of list reached");
     fetchMore();
   };
 

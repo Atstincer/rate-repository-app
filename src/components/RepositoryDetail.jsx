@@ -16,10 +16,15 @@ const RepositoryDetail = () => {
   const { id } = useParams();
   //console.log("id capture in new View", id);
 
-  const { repository, loading } = useRepository(id);
+  const { repository, loading, fetchMore } = useRepository(id);
   const reviews = loading ? [] : repository.reviews.edges.map((e) => e.node);
 
   //if (!loading) console.log(reviews);
+
+  const onEndReach = () => {
+    console.log("end of review list reached...fetching more");
+    fetchMore();
+  };
 
   return loading ? null : (
     <FlatList
@@ -30,6 +35,8 @@ const RepositoryDetail = () => {
         <RepositoryItem item={repository} detailView />
       )}
       ItemSeparatorComponent={ItemSeparator}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
     />
   );
 };
