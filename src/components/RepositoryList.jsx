@@ -56,6 +56,7 @@ export const RepositoryListContainer = ({
   repositories,
   pickerState,
   searchBarState,
+  onEndReach,
 }) => {
   const repositoryNodes = repositories
     ? repositories.edges.map((e) => e.node)
@@ -72,7 +73,8 @@ export const RepositoryListContainer = ({
           searchBarState={searchBarState}
         />
       }
-      StickyHeaderComponent={true}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
     />
   );
 };
@@ -85,16 +87,23 @@ const RepositoryList = () => {
   const [deboncedQuery] = useDebounce(searchQuery, 500);
   //console.log("deboncedQuery", deboncedQuery);
 
-  const { repositories } = useRepositories({
+  const { repositories, fetchMore } = useRepositories({
     ...SortingOptions[sortKey],
     searchKeyword: deboncedQuery,
+    first: 3,
   });
+
+  const onEndReach = () => {
+    console.log("end of list reached");
+    fetchMore();
+  };
 
   return (
     <RepositoryListContainer
       repositories={repositories}
       pickerState={{ value: sortKey, setValue: setSortKey }}
       searchBarState={{ value: searchQuery, setValue: setSearchQuery }}
+      onEndReach={onEndReach}
     />
   );
 };
